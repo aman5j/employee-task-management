@@ -67,7 +67,7 @@ router.patch(
   protect,
   requireRole("admin"),
   taskIdValidation,
-  updateTaskValidation,
+//   updateTaskValidation,
   assignTask
 );
 
