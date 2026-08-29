@@ -5,6 +5,9 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
+const employeeRoutes = require("./routes/employeeRoutes");
+const taskRoutes = require("./routes/taskRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const {
   notFound,
@@ -14,7 +17,7 @@ const {
 // Load environment variables
 dotenv.config();
 
-// Connect MongoDB
+// Connect database
 connectDB();
 
 const app = express();
@@ -46,10 +49,16 @@ app.get("/", (req, res) => {
 });
 
 // ==========================================
-// ROUTES
+// API ROUTES
 // ==========================================
 
 app.use("/api/auth", authRoutes);
+
+app.use("/api/employees", employeeRoutes);
+
+app.use("/api/tasks", taskRoutes);
+
+app.use("/api/dashboard", dashboardRoutes);
 
 // ==========================================
 // ERROR HANDLING

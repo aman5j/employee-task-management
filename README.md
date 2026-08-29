@@ -11,3 +11,9 @@
   "password": "Employee@123",
   "role": "employee"
 }
+
+{
+  "name": "Employee Two",
+  "email": "employee2@example.com",
+  "password": "Employee@123"
+}
