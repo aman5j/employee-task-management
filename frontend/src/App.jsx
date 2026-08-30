@@ -8,7 +8,9 @@ import {
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import Dashboard from "./pages/admin/Dashboard";
+import AdminLayout from "./components/layout/AdminLayout";
+
 import EmployeeDashboard from "./pages/employee/EmployeeDashboard";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -18,7 +20,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Routes */}
+        {/* Public */}
 
         <Route
           path="/"
@@ -40,20 +42,45 @@ function App() {
           element={<Register />}
         />
 
-        {/* Protected Routes */}
+        {/* Protected */}
 
         <Route element={<ProtectedRoute />}>
-          
-          {/* Admin Routes */}
+          {/* Admin */}
 
-          <Route element={<RoleRoute allowedRoles={["admin"]} />}>
-            <Route
-              path="/admin/dashboard"
-              element={<AdminDashboard />}
-            />
+          <Route
+            element={
+              <RoleRoute
+                allowedRoles={["admin"]}
+              />
+            }
+          >
+            <Route element={<AdminLayout />}>
+              <Route
+                path="/admin/dashboard"
+                element={<Dashboard />}
+              />
+
+              <Route
+                path="/admin/employees"
+                element={
+                  <div className="rounded-xl bg-white p-6">
+                    Employee Management — Coming Next
+                  </div>
+                }
+              />
+
+              <Route
+                path="/admin/tasks"
+                element={
+                  <div className="rounded-xl bg-white p-6">
+                    Task Management — Coming Next
+                  </div>
+                }
+              />
+            </Route>
           </Route>
 
-          {/* Employee Routes */}
+          {/* Employee */}
 
           <Route
             element={
@@ -67,10 +94,9 @@ function App() {
               element={<EmployeeDashboard />}
             />
           </Route>
-
         </Route>
 
-        {/* Unknown Route */}
+        {/* Fallback */}
 
         <Route
           path="*"
