@@ -1,38 +1,46 @@
-import { useEffect, useState } from "react";
-import api from "./services/api";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import EmployeeDashboard from "./pages/employee/EmployeeDashboard";
 
 function App() {
-  const [message, setMessage] = useState("Checking API...");
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const checkApi = async () => {
-      try {
-        const response = await api.get("/health");
-
-        setMessage(response.data.message);
-      } catch (error) {
-        console.error(error);
-
-        setError("Unable to connect to backend");
-      }
-    };
-
-    checkApi();
-  }, []);
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-100">
-      <div className="rounded-xl bg-white p-10 text-center shadow-lg">
-        <h1 className="text-3xl font-bold">
-          Employee Task Management System
-        </h1>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<Navigate to="/login" replace />}
+        />
 
-        <p className="mt-4 text-lg">
-          {error || message}
-        </p>
-      </div>
-    </div>
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/register"
+          element={<Register />}
+        />
+
+        <Route
+          path="/admin/dashboard"
+          element={<AdminDashboard />}
+        />
+
+        <Route
+          path="/employee/dashboard"
+          element={<EmployeeDashboard />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
