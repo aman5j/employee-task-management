@@ -6,6 +6,8 @@ const requireRole = require("../middleware/roleMiddleware");
 const {
   createEmployee,
   getEmployees,
+  updateEmployee,
+  deleteEmployee,
 } = require("../controllers/employeeController");
 
 const {
@@ -29,6 +31,22 @@ router.get(
   protect,
   requireRole("admin"),
   getEmployees
+);
+
+// Update employee
+router.put(
+  "/:id",
+  protect,
+  requireRole("admin"),
+  updateEmployee
+);
+
+// Delete employee
+router.delete(
+  "/:id",
+  protect,
+  requireRole("admin"),
+  deleteEmployee
 );
 
 module.exports = router;

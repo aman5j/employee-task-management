@@ -1,15 +1,11 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 
-import Dashboard from "./pages/admin/Dashboard";
 import AdminLayout from "./components/layout/AdminLayout";
+import Dashboard from "./pages/admin/Dashboard";
+import Employees from "./pages/admin/Employees";
 
 import EmployeeDashboard from "./pages/employee/EmployeeDashboard";
 
@@ -22,52 +18,22 @@ function App() {
       <Routes>
         {/* Public */}
 
-        <Route
-          path="/"
-          element={
-            <Navigate
-              to="/login"
-              replace
-            />
-          }
-        />
+        <Route path="/" element={<Navigate to="/login" replace />} />
 
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+        <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+        <Route path="/register" element={<Register />} />
 
         {/* Protected */}
 
         <Route element={<ProtectedRoute />}>
           {/* Admin */}
 
-          <Route
-            element={
-              <RoleRoute
-                allowedRoles={["admin"]}
-              />
-            }
-          >
+          <Route element={<RoleRoute allowedRoles={["admin"]} />}>
             <Route element={<AdminLayout />}>
-              <Route
-                path="/admin/dashboard"
-                element={<Dashboard />}
-              />
+              <Route path="/admin/dashboard" element={<Dashboard />} />
 
-              <Route
-                path="/admin/employees"
-                element={
-                  <div className="rounded-xl bg-white p-6">
-                    Employee Management — Coming Next
-                  </div>
-                }
-              />
+              <Route path="/admin/employees" element={<Employees />} />
 
               <Route
                 path="/admin/tasks"
@@ -82,31 +48,14 @@ function App() {
 
           {/* Employee */}
 
-          <Route
-            element={
-              <RoleRoute
-                allowedRoles={["employee"]}
-              />
-            }
-          >
-            <Route
-              path="/employee/dashboard"
-              element={<EmployeeDashboard />}
-            />
+          <Route element={<RoleRoute allowedRoles={["employee"]} />}>
+            <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
           </Route>
         </Route>
 
         {/* Fallback */}
 
-        <Route
-          path="*"
-          element={
-            <Navigate
-              to="/login"
-              replace
-            />
-          }
-        />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
