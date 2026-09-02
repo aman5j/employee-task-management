@@ -10,15 +10,15 @@ const getDashboardStats = async (req, res, next) => {
     const totalTasks = await Task.countDocuments();
 
     const todoTasks = await Task.countDocuments({
-      status: "Todo",
+      status: { $in: ["Todo", "todo"] },
     });
 
     const inProgressTasks = await Task.countDocuments({
-      status: "In Progress",
+      status: { $in: ["In Progress", "in-progress", "InProgress", "in progress"] },
     });
 
     const completedTasks = await Task.countDocuments({
-      status: "Completed",
+      status: { $in: ["Completed", "completed"] },
     });
 
     return res.status(200).json({

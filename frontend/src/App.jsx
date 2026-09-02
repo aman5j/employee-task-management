@@ -6,6 +6,7 @@ import Register from "./pages/auth/Register";
 import AdminLayout from "./components/layout/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import Employees from "./pages/admin/Employees";
+import Tasks from "./pages/admin/Tasks";
 
 import EmployeeDashboard from "./pages/employee/EmployeeDashboard";
 
@@ -35,7 +36,7 @@ function App() {
 
               <Route path="/admin/employees" element={<Employees />} />
 
-              <Route
+              {/* <Route
                 path="/admin/tasks"
                 element={
                   <div className="rounded-xl bg-white p-6">
@@ -43,7 +44,15 @@ function App() {
                   </div>
                 }
               />
+            </Route> */}
+
+            <Route
+              path="/admin/tasks"
+              element={<Tasks />}
+            />
+
             </Route>
+            
           </Route>
 
           {/* Employee */}
